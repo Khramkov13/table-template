@@ -16,6 +16,7 @@ export class TablePage implements OnInit {
     { key: 'firstName', label: 'First Name', sortable: true },
     { key: 'lastName', label: 'Last Name', sortable: true },
     { key: 'email', label: 'Email', sortable: true },
+    { key: 'phone', label: 'Phone', sortable: true },
     { key: 'role', label: 'Role', sortable: true },
     { key: 'status', label: 'Status', sortable: true },
   ];

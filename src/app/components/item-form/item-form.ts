@@ -16,6 +16,7 @@ export class ItemForm implements OnInit {
   readonly firstName = signal('');
   readonly lastName = signal('');
   readonly email = signal('');
+  readonly phone = signal('');
   readonly role = signal('');
   readonly status = signal('active');
 
@@ -28,6 +29,7 @@ export class ItemForm implements OnInit {
       this.firstName.set(String(current['firstName'] ?? ''));
       this.lastName.set(String(current['lastName'] ?? ''));
       this.email.set(String(current['email'] ?? ''));
+      this.phone.set(String(current['phone'] ?? ''));
       this.role.set(String(current['role'] ?? ''));
       this.status.set(String(current['status'] ?? 'active'));
     }
@@ -40,6 +42,7 @@ export class ItemForm implements OnInit {
       firstName: this.firstName(),
       lastName: this.lastName(),
       email: this.email(),
+      phone: this.phone(),
       role: this.role(),
       status: this.status(),
     };
