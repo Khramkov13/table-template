@@ -13,7 +13,8 @@ export class ItemForm implements OnInit {
   readonly save = output<Partial<TableRow>>();
   readonly cancel = output<void>();
 
-  readonly name = signal('');
+  readonly firstName = signal('');
+  readonly lastName = signal('');
   readonly email = signal('');
   readonly role = signal('');
   readonly status = signal('active');
@@ -24,7 +25,8 @@ export class ItemForm implements OnInit {
     const current = this.item();
     if (current) {
       this.isEdit.set(true);
-      this.name.set(String(current['name'] ?? ''));
+      this.firstName.set(String(current['firstName'] ?? ''));
+      this.lastName.set(String(current['lastName'] ?? ''));
       this.email.set(String(current['email'] ?? ''));
       this.role.set(String(current['role'] ?? ''));
       this.status.set(String(current['status'] ?? 'active'));
@@ -32,10 +34,11 @@ export class ItemForm implements OnInit {
   }
 
   onSubmit(): void {
-    if (!this.name() || !this.email()) return;
+    if (!this.firstName() || !this.lastName() || !this.email()) return;
 
     const data: Partial<TableRow> = {
-      name: this.name(),
+      firstName: this.firstName(),
+      lastName: this.lastName(),
       email: this.email(),
       role: this.role(),
       status: this.status(),

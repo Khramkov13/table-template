@@ -64,6 +64,15 @@
   padding: 24px;
 }
 
+.form-row {
+  display: flex;
+  gap: 12px;
+
+  .form-group {
+    flex: 1;
+  }
+}
+
 .form-group {
   margin-bottom: 18px;
 

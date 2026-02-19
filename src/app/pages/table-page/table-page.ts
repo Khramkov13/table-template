@@ -13,7 +13,8 @@ import { TableColumn, TableRow, SortState } from '../../models/table.models';
 export class TablePage implements OnInit {
   readonly columns: TableColumn[] = [
     { key: 'id', label: 'ID', sortable: true },
-    { key: 'name', label: 'Name', sortable: true },
+    { key: 'firstName', label: 'First Name', sortable: true },
+    { key: 'lastName', label: 'Last Name', sortable: true },
     { key: 'email', label: 'Email', sortable: true },
     { key: 'role', label: 'Role', sortable: true },
     { key: 'status', label: 'Status', sortable: true },
