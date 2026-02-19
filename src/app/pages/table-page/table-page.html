@@ -1,0 +1,42 @@
+<div class="page">
+  <header class="page-header">
+    <div class="header-left">
+      <h1>Table Template</h1>
+      <p class="subtitle">Manage your data with ease</p>
+    </div>
+    <div class="header-right">
+      <div class="search-box">
+        <input
+          type="text"
+          placeholder="Search..."
+          [value]="searchQuery()"
+          (input)="onSearch($event)"
+        />
+      </div>
+      <button class="btn btn-primary" (click)="openCreateForm()">
+        + Add Item
+      </button>
+    </div>
+  </header>
+
+  <app-data-table
+    [columns]="columns"
+    [rows]="rows()"
+    [totalItems]="totalItems()"
+    [currentPage]="currentPage()"
+    [pageSize]="pageSize()"
+    [loading]="loading()"
+    (sortChange)="onSortChange($event)"
+    (pageChange)="onPageChange($event)"
+    (rowEdit)="onEdit($event)"
+    (rowDelete)="onDelete($event)"
+  />
+
+  @if (showForm()) {
+    <app-item-form
+      [item]="editingItem()"
+      (save)="onSave($event)"
+      (cancel)="onCancelForm()"
+    />
+  }
+</div>

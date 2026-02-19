@@ -1,0 +1,100 @@
+<div class="table-container">
+  @if (loading()) {
+    <div class="loading-overlay">
+      <div class="spinner"></div>
+    </div>
+  }
+
+  <table class="data-table">
+    <thead>
+      <tr>
+        @for (col of columns(); track col.key) {
+          <th
+            [class.sortable]="col.sortable"
+            (click)="onSort(col)"
+          >
+            <span class="header-content">
+              {{ col.label }}
+              @if (col.sortable) {
+                <span class="sort-icon">{{ getSortIcon(col) }}</span>
+              }
+            </span>
+          </th>
+        }
+        <th class="actions-column">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (row of rows(); track row.id) {
+        <tr>
+          @for (col of columns(); track col.key) {
+            <td>{{ getCellValue(row, col.key) }}</td>
+          }
+          <td class="actions-cell">
+            <button class="btn btn-edit" (click)="onEdit(row)" title="Edit">
+              ✏️
+            </button>
+            <button class="btn btn-delete" (click)="onDelete(row.id)" title="Delete">
+              🗑️
+            </button>
+          </td>
+        </tr>
+      } @empty {
+        <tr>
+          <td [attr.colspan]="columns().length + 1" class="empty-row">
+            No data available
+          </td>
+        </tr>
+      }
+    </tbody>
+  </table>
+
+  <div class="pagination">
+    <span class="pagination-info">
+      Showing {{ (currentPage() - 1) * pageSize() + 1 }}–{{ currentPage() * pageSize() > totalItems() ? totalItems() : currentPage() * pageSize() }}
+      of {{ totalItems() }}
+    </span>
+
+    <div class="pagination-controls">
+      <button
+        class="btn btn-page"
+        [disabled]="currentPage() === 1"
+        (click)="onPageChange(1)"
+      >
+        « First
+      </button>
+      <button
+        class="btn btn-page"
+        [disabled]="currentPage() === 1"
+        (click)="onPageChange(currentPage() - 1)"
+      >
+        ‹ Prev
+      </button>
+
+      @for (page of pages(); track page) {
+        <button
+          class="btn btn-page"
+          [class.active]="page === currentPage()"
+          (click)="onPageChange(page)"
+        >
+          {{ page }}
+        </button>
+      }
+
+      <button
+        class="btn btn-page"
+        [disabled]="currentPage() === totalPages()"
+        (click)="onPageChange(currentPage() + 1)"
+      >
+        Next ›
+      </button>
+      <button
+        class="btn btn-page"
+        [disabled]="currentPage() === totalPages()"
+        (click)="onPageChange(totalPages())"
+      >
+        Last »
+      </button>
+    </div>
+  </div>
+</div>
